@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+logs/
+backups/
+workout_history.json
+*.bak
+*.quarantine
+*.audit*
+# Health / personal data
+*.health*
+*.private*
+# Environment / secrets
+*.env
+.env*
+*_secret*
+*secret*
+*.key
+*.pem
+credentials*
+.secrets

@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SOURCE="/root/projects/fitness-coach/workout_history.json"
-BACKUP_DIR="/root/projects/fitness-coach/backups"
-LOG_DIR="/root/projects/fitness-coach/logs"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BASE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+SOURCE="$BASE_DIR/workout_history.json"
+BACKUP_DIR="$BASE_DIR/backups"
+LOG_DIR="$BASE_DIR/logs"
 LOG_FILE="$LOG_DIR/backup.log"
 MAX_BACKUPS=30
 

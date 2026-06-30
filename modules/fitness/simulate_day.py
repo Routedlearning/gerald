@@ -1,11 +1,13 @@
 import sys
 import datetime
+import os
 from planner import build_week
 from adaptation import evaluate_week
 import json
+from storage import HISTORY_PATH
 
 def simulate(day_name, week_start):
-    with open("/root/projects/fitness-coach/workout_history.json") as f:
+    with open(HISTORY_PATH) as f:
         state = json.load(f)
 
     last_week = [w for w in state.get("workouts", []) if w.get("week") == week_start]

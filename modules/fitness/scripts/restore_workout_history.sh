@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PROJECT_DIR="/root/projects/fitness-coach"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BASE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+PROJECT_DIR="$BASE_DIR"
+
 BACKUP_DIR="$PROJECT_DIR/backups"
 HISTORY_FILE="$PROJECT_DIR/workout_history.json"
 STORAGE_PY="$PROJECT_DIR/storage.py"
@@ -22,12 +25,11 @@ list_backups() {
 
 validate_backup() {
   local backup_path="$1"
-  python3 - "$STORAGE_PY" "$backup_path" <<'PY'
+  python3 "$STORAGE_PY" "$backup_path" <<'PY'
 import sys, json
 from storage import validate
 
-storage_path = sys.argv[1]
-backup_path = sys.argv[2]
+backup_path = sys.argv[1]
 
 with open(backup_path, "r") as f:
     state = json.load(f)

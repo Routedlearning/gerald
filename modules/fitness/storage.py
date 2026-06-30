@@ -3,8 +3,8 @@ import os
 import tempfile
 from datetime import datetime
 
-HISTORY_PATH = "/root/projects/fitness-coach/workout_history.json"
-BACKUP_DIR   = "/root/projects/fitness-coach/backups"
+HISTORY_PATH = "/root/projects/gerald/modules/fitness/workout_history.json"
+BACKUP_DIR   = "/root/projects/gerald/modules/fitness/backups"
 MAX_BACKUPS  = 30
 
 
@@ -66,10 +66,10 @@ def _migrate_v1_to_v2(state: dict) -> None:
         if isinstance(bp_str, str) and "/" in bp_str:
             parts = bp_str.split("/", 1)
             try:
-                state["last_checkin"]["bp_systolic"]  = int(parts[0])
+                state["last_checkin"]["bp_systolic"] = int(parts[0])
                 state["last_checkin"]["bp_diastolic"] = int(parts[1])
             except (ValueError, IndexError):
-                state["last_checkin"]["bp_systolic"]  = None
+                state["last_checkin"]["bp_systolic"] = None
                 state["last_checkin"]["bp_diastolic"] = None
         elif bp_str is not None:
             # Already split somehow — leave as-is

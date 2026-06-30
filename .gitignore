@@ -1,20 +1,10 @@
+# Personal data and logs - never commit
+modules/fitness/workout_history.json
+modules/fitness/logs/
+modules/fitness/backups/
+*.log
+*.bak
+
+# Python
 __pycache__/
 *.pyc
-logs/
-backups/
-workout_history.json
-*.bak
-*.quarantine
-*.audit*
-# Health / personal data
-*.health*
-*.private*
-# Environment / secrets
-*.env
-.env*
-*_secret*
-*secret*
-*.key
-*.pem
-credentials*
-.secrets

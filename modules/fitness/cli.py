@@ -18,6 +18,7 @@ def build_week_for_display(weight_lbs, week_start_date, history_week_key):
         current_weight=state.get("last_weight", weight_lbs),
         current_5k=state.get("last_5k_time", "40:00"),
         missed_streak=state.get("missed_streak", 0),
+        feedback_log=state.get("feedback_log"),
     )
 
     return build_week(weight_lbs=weight_lbs, adaptation=adaptation), adaptation

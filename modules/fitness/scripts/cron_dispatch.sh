@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-LOG_DIR="/root/projects/fitness-coach/logs"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BASE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+LOG_DIR="$BASE_DIR/logs"
 LOG_FILE="$LOG_DIR/cron_dispatch.log"
-CLI_DIR="/root/projects/fitness-coach"
+CLI_DIR="$BASE_DIR"
 CLI_SCRIPT="$CLI_DIR/cli.py"
 WEEK_START="${1:-2026-06-29}"
 
