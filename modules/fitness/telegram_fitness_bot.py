@@ -86,7 +86,7 @@ def forward_to_local_handler(update: Update, settings: Settings) -> str:
 
     try:
         data = json.dumps(payload).encode("utf-8")
-        req = Request(
+        req=Request(
             settings.inbound_url,
             data=data,
             headers={"Content-Type": "application/json"},
@@ -178,12 +178,21 @@ def main() -> int:
     if settings.dry_run:
         return preflight_dry_run(settings)
 
+    for noisy in ("httpx", "telegram", "telegram.ext", "telegram.request"):
+        logging.getLogger(noisy).setLevel(logging.WARNING)
+
+    logging.info("starting telegram bot polling")
     application = (
         ApplicationBuilder().token(settings.token).concurrent_updates(True).build()
     )
     application.add_handler(
-        MessageHandler(filters.TEXT & ~filters.COMMAND, lambda u: handle_text(u, settings))
+        MessageHandler(filters.TEXT & ~filters.COMMAND, lambda update, context: handle_text(update, settings))
     )
+
+    async def _on_error(update: object, context) -> None:  # type: ignore[override]
+        logging.warning("handler_error type=%s", type(context.error).__name__)
+
+    application.add_error_handler(_on_error)
     application.run_polling()
     return 0
 
