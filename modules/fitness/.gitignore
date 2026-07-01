@@ -10,8 +10,7 @@ workout_history.json
 *.health*
 *.private*
 # Environment / secrets
-*.env
-.env*
+.env
 *_secret*
 *secret*
 *.key
